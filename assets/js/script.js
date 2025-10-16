@@ -167,3 +167,20 @@ window.addEventListener("scroll", function () {
     downloadBtn.style.display = "block";
   }
 });
+
+
+if (sidebar && window.innerWidth < 768) {
+        let debounceTimeout;
+        const observer = new MutationObserver(() => {
+          clearTimeout(debounceTimeout);
+          debounceTimeout = setTimeout(() => {
+            const isActive = sidebar.classList.contains("active");
+            const resumeDownload = document.querySelector(".resume-download");
+            if (resumeDownload) {
+              resumeDownload.style.display = isActive ? "none" : "block";
+            }
+          }, 10); // 100ms debounce
+        });
+
+        observer.observe(sidebar, { attributes: true, attributeFilter: ["class"] });
+}
