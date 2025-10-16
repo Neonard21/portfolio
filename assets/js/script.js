@@ -177,7 +177,11 @@ if (sidebar && window.innerWidth < 768) {
             const isActive = sidebar.classList.contains("active");
             const resumeDownload = document.querySelector(".resume-download");
             if (resumeDownload) {
-              resumeDownload.style.display = isActive ? "none" : "block";
+              if (isActive) {
+                resumeDownload.style.display = "none";
+              }else {
+                resumeDownload.style.display = "block";
+              }
             }
           }, 10); // 100ms debounce
         });
