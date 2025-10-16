@@ -1022,12 +1022,14 @@
 
                   emailjs.sendForm("service_ipepdya","template_i02beco", this)
                   .then(function(response) {
+                  document.getElementById('contact-form').reset();  
                   alert("✅ Email sent successfully!");
                 }, function(error) {
                   alert("❌ Failed to send email: " + error.text);
                 });
               });
     
+
               </script>
 
             </form>
