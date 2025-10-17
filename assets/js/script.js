@@ -161,30 +161,21 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
 const downloadBtn = document.querySelector(".resume-download");
 window.addEventListener("scroll", function () {
-  if (window.scrollY > 20) {
+  if (window.scrollY > 20 || sidebar.classList.contains("active")) {
     downloadBtn.style.display = "none";
   } else {
     downloadBtn.style.display = "block";
   }
 });
 
+const observer = new MutationObserver(() => {
+  const isActive = sidebar.classList.contains("active");
+  downloadBtn.style.display = isActive ? 'none' : 'block';
+});
 
-if (sidebar && window.innerWidth < 768) {
-        let debounceTimeout;
-        const observer = new MutationObserver(() => {
-          clearTimeout(debounceTimeout);
-          debounceTimeout = setTimeout(() => {
-            const isActive = sidebar.classList.contains("active");
-            const resumeDownload = document.querySelector(".resume-download");
-            if (resumeDownload) {
-              if (isActive) {
-                resumeDownload.style.display = "none";
-              }else {
-                resumeDownload.style.display = "block";
-              }
-            }
-          }, 10); // 100ms debounce
-        });
+observer.observe(sidebar, { attributes: true, attributeFilter: ['class'] });
 
-        observer.observe(sidebar, { attributes: true, attributeFilter: ["class"] });
-}
+// sidebarBtn.addEventListener("click", () => {
+//   sidebar.classList.toggle("active");
+// });
+
